@@ -2601,7 +2601,8 @@
       "Microsoft.EntityFrameworkCore >= 7.0.5",
       "Microsoft.EntityFrameworkCore.Design >= 7.0.5",
       "Microsoft.EntityFrameworkCore.Sqlite >= 7.0.5",
-      "Microsoft.EntityFrameworkCore.Sqlite.Core >= 7.0.5"
+      "Microsoft.EntityFrameworkCore.Sqlite.Core >= 7.0.5",
+      "Microsoft.Extensions.Logging >= 7.0.0"
     ]
   },
   "packageFolders": {
@@ -2690,6 +2691,10 @@
           "Microsoft.EntityFrameworkCore.Sqlite.Core": {
             "target": "Package",
             "version": "[7.0.5, )"
+          },
+          "Microsoft.Extensions.Logging": {
+            "target": "Package",
+            "version": "[7.0.0, )"
           }
         },
         "imports": [

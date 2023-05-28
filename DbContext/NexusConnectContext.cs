@@ -1,17 +1,21 @@
+using System;
+using System.Data;
 namespace nexus_connect.DbContext;
 
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using nexus_connect.Data.Entities;
 public class NexusConnectContext : IdentityDbContext<StoreUser>
 {
     public DbSet<Client> Client { get; set; }
-
     public NexusConnectContext(DbContextOptions<NexusConnectContext> options) : base(options)
     {
+
     }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        base.OnModelCreating(modelBuilder);
         modelBuilder.Entity<Client>().HasData(
             new Client()
             {
@@ -52,7 +56,7 @@ public class NexusConnectContext : IdentityDbContext<StoreUser>
                 TicketCaseType = Data.TicketCaseType.BillingInquiry
             }
         );
-        base.OnModelCreating(modelBuilder);
+
     }
 }
 

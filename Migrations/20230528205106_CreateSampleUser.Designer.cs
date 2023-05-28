@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using nexus_connect.DbContext;
 
@@ -10,9 +11,11 @@ using nexus_connect.DbContext;
 namespace nexus_connect.Migrations
 {
     [DbContext(typeof(NexusConnectContext))]
-    partial class NexusConnectContextModelSnapshot : ModelSnapshot
+    [Migration("20230528205106_CreateSampleUser")]
+    partial class CreateSampleUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.5");
