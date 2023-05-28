@@ -25,7 +25,6 @@ public class AccessController : Controller
         _signInManager = signInManager;
         _logger = logger;
     }
-
     public IActionResult Login()
     {
         if (this.User.Identity.IsAuthenticated)
@@ -34,6 +33,7 @@ public class AccessController : Controller
         }
         return View();
     }
+
 
     public async Task<IActionResult> Logout()
     {
@@ -44,6 +44,7 @@ public class AccessController : Controller
         }
         return View();
     }
+
     [HttpPost]
     public async Task<IActionResult> Login(LoginViewModel model)
     {

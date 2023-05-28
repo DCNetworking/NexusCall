@@ -10,7 +10,9 @@ public class RedirectMiddleware
     public async Task InvokeAsync(HttpContext context)
     {
         // Check if the user is authenticated
-        if (!context.User.Identity.IsAuthenticated && context.Request.Path != "/Access/Login")
+        if (!context.User.Identity.IsAuthenticated
+        && context.Request.Path != "/Access/Login"
+        && context.Request.Path != "/Access/Signup")
         {
             // Perform the redirect to the desired login page
             context.Response.Redirect("/Access/Login");
