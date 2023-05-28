@@ -1,3 +1,5 @@
+using System.Data.Common;
+using System.Data;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -16,8 +18,10 @@ public class AccessController : Controller
 {
     private readonly ILogger<AccessController> _logger;
     readonly SignInManager<StoreUser> _signInManager;
-    public AccessController(ILogger<AccessController> logger, SignInManager<StoreUser> signInManager)
+    readonly UserManager<StoreUser> _userManager;
+    public AccessController(ILogger<AccessController> logger, SignInManager<StoreUser> signInManager, UserManager<StoreUser> userManager)
     {
+        _userManager = userManager;
         _signInManager = signInManager;
         _logger = logger;
     }
@@ -27,6 +31,16 @@ public class AccessController : Controller
         if (this.User.Identity.IsAuthenticated)
         {
             return RedirectToAction("Index", "Home");
+        }
+        return View();
+    }
+
+    public async Task<IActionResult> Logout()
+    {
+        if (this.User.Identity.IsAuthenticated)
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Login", "Access");
         }
         return View();
     }
