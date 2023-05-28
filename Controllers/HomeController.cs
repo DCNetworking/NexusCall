@@ -4,6 +4,8 @@ using nexus_connect.Data;
 using nexus_connect.Models;
 using nexus_connect.ViewModels;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
+
 namespace nexus_connect.Controllers;
 
 public class HomeController : Controller
@@ -17,9 +19,12 @@ public class HomeController : Controller
         _logger = logger;
         _repository = repository;
     }
-
     public async Task<IActionResult> Index()
     {
+        if (!this.User.Identity.IsAuthenticated)
+        {
+            return RedirectToAction("Login", "Access");
+        }
         var clientsAsync = await _repository.GetAllClientsAsync();
         var results = _mapper.Map<IEnumerable<ClientViewModel>>(clientsAsync);
         return View(results);
