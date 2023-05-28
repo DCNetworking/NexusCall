@@ -32,6 +32,26 @@ public class NexusConnectContext : IdentityDbContext<StoreUser>
                  Status = Data.StatusType.Active
              }
         );
+        modelBuilder.Entity<Ticket>().HasData(
+            new Ticket()
+            {
+                Id = 1,
+                TicketCreatedTime = DateTimeOffset.UtcNow.ToUnixTimeSeconds(),
+                TicketEndTime = 0,
+                TicketLastChangeTime = DateTimeOffset.UtcNow.ToUnixTimeSeconds(),
+                Cid = 1,
+                TicketCaseType = Data.TicketCaseType.AccountAccess
+            },
+            new Ticket()
+            {
+                Id = 2,
+                TicketCreatedTime = DateTimeOffset.UtcNow.ToUnixTimeSeconds() - 1800,
+                TicketEndTime = 0,
+                TicketLastChangeTime = DateTimeOffset.UtcNow.ToUnixTimeSeconds() - 1800,
+                Cid = 1,
+                TicketCaseType = Data.TicketCaseType.BillingInquiry
+            }
+        );
         base.OnModelCreating(modelBuilder);
     }
 }
