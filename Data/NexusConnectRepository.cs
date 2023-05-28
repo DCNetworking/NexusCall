@@ -8,7 +8,7 @@ using nexus_connect.DbContext;
 
 namespace nexus_connect.Data
 {
-    public class NexusConnectRepository
+    public class NexusConnectRepository : INexusConnectRepository
     {
         readonly NexusConnectContext _ctx;
         public NexusConnectRepository(NexusConnectContext ctx)

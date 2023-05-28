@@ -1,9 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "HC1LcyIvjBzwpoygqkrnXuQNG0S98YLD4ATGJKnuRH10sIA+grKY7FIyS9dejXO+/u7ZKRe9XQYnRWBjfUGVSA==",
+  "dgSpecHash": "8L5GQBYrRVNKd8qA2U9xCmWOZeJs/ZTNiYKfp19aI2F0Q4+XEh0TAGCG158JJ75ZYoHJzyLH7bfVVO79ApL38g==",
   "success": true,
   "projectFilePath": "/Users/damiancabon/nexus_connect/nexus_connect.csproj",
   "expectedPackageFiles": [
+    "/Users/damiancabon/.nuget/packages/automapper/12.0.1/automapper.12.0.1.nupkg.sha512",
+    "/Users/damiancabon/.nuget/packages/automapper.data/7.0.2/automapper.data.7.0.2.nupkg.sha512",
+    "/Users/damiancabon/.nuget/packages/automapper.extensions.enummapping/3.1.0/automapper.extensions.enummapping.3.1.0.nupkg.sha512",
+    "/Users/damiancabon/.nuget/packages/automapper.extensions.expressionmapping/6.0.4/automapper.extensions.expressionmapping.6.0.4.nupkg.sha512",
+    "/Users/damiancabon/.nuget/packages/automapper.extensions.microsoft.dependencyinjection/12.0.1/automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
     "/Users/damiancabon/.nuget/packages/humanizer.core/2.14.1/humanizer.core.2.14.1.nupkg.sha512",
     "/Users/damiancabon/.nuget/packages/microsoft.aspnetcore.authentication.abstractions/2.2.0/microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",
     "/Users/damiancabon/.nuget/packages/microsoft.aspnetcore.authentication.core/2.2.0/microsoft.aspnetcore.authentication.core.2.2.0.nupkg.sha512",
@@ -25,6 +30,7 @@
     "/Users/damiancabon/.nuget/packages/microsoft.aspnetcore.routing/2.2.0/microsoft.aspnetcore.routing.2.2.0.nupkg.sha512",
     "/Users/damiancabon/.nuget/packages/microsoft.aspnetcore.routing.abstractions/2.2.0/microsoft.aspnetcore.routing.abstractions.2.2.0.nupkg.sha512",
     "/Users/damiancabon/.nuget/packages/microsoft.aspnetcore.webutilities/2.2.0/microsoft.aspnetcore.webutilities.2.2.0.nupkg.sha512",
+    "/Users/damiancabon/.nuget/packages/microsoft.csharp/4.7.0/microsoft.csharp.4.7.0.nupkg.sha512",
     "/Users/damiancabon/.nuget/packages/microsoft.data.sqlite.core/7.0.5/microsoft.data.sqlite.core.7.0.5.nupkg.sha512",
     "/Users/damiancabon/.nuget/packages/microsoft.entityframeworkcore/7.0.5/microsoft.entityframeworkcore.7.0.5.nupkg.sha512",
     "/Users/damiancabon/.nuget/packages/microsoft.entityframeworkcore.abstractions/7.0.5/microsoft.entityframeworkcore.abstractions.7.0.5.nupkg.sha512",
