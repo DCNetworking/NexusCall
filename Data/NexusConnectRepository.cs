@@ -17,7 +17,7 @@ namespace nexus_connect.Data
         }
         public async Task<IEnumerable<Client>> GetAllClientsAsync()
         {
-            return await _ctx.Client.OrderBy(p => p.CreatedTime).ToListAsync();
+            return await _ctx.Client.OrderByDescending(p => p.CreatedTime).ToListAsync();
         }
         public async Task<Client> GetClientByIdAsync(int id)
         {

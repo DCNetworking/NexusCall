@@ -20,6 +20,10 @@
           "net7.0"
         ],
         "sources": {
+          "/Users/damiancabon/Downloads": {},
+          "/Users/damiancabon/Projects/AsyncTrain": {},
+          "/usr/local/share/dotnet/library-packs": {},
+          "/usr/local/share/dotnet/sdk/7.0.302/Sdks/Microsoft.NET.Sdk.Web/library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {

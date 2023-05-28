@@ -1,22 +1,28 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using nexus_connect.Data;
 using nexus_connect.Models;
 using nexus_connect.ViewModels;
-
+using AutoMapper;
 namespace nexus_connect.Controllers;
 
 public class HomeController : Controller
 {
-    private readonly ILogger<HomeController> _logger;
-
-    public HomeController(ILogger<HomeController> logger)
+    readonly IMapper _mapper;
+    readonly ILogger<HomeController> _logger;
+    readonly INexusConnectRepository _repository;
+    public HomeController(ILogger<HomeController> logger, INexusConnectRepository repository, IMapper mapper)
     {
+        _mapper = mapper;
         _logger = logger;
+        _repository = repository;
     }
 
-    public IActionResult Index(ClientViewModel model)
+    public async Task<IActionResult> Index()
     {
-        return View();
+        var clientsAsync = await _repository.GetAllClientsAsync();
+        var results = _mapper.Map<IEnumerable<ClientViewModel>>(clientsAsync);
+        return View(results);
     }
 
     public IActionResult Privacy()

@@ -21,7 +21,16 @@ public class NexusConnectContext : IdentityDbContext<StoreUser>
                 LastChangeTime = 0,
                 LocalUrl = "ebay",
                 Status = Data.StatusType.Active
-            }
+            },
+             new Client()
+             {
+                 Id = 2,
+                 Name = "TDJ Developer",
+                 CreatedTime = DateTimeOffset.UtcNow.ToUnixTimeSeconds() - 1000,
+                 LastChangeTime = 0,
+                 LocalUrl = "tdj",
+                 Status = Data.StatusType.Active
+             }
         );
         base.OnModelCreating(modelBuilder);
     }

@@ -3,12 +3,24 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
+<div class="<div class="container-fluid">
+ <table class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Name</th>
+      <th scope="col">CreatedDate</th>
+    </tr>
+  </thead>
+    <tbody>
     @foreach (var item in Model)
     {
-        <div class="container flex p-5">
-        <div>@item.Name</div>
-        <div>@item.CreatedTime</div>
-        </div>
+    <tr>
+      <th scope="row">@item.Id</th>
+      <td>@item.Name</td>
+      <td>@item.CreatedTime</td>
+    </tr>
     }
+    </tbody>
+ </table>
 </div>
