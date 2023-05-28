@@ -17,4 +17,5 @@ public class Client
     public long LastChangeTime { get; set; }
     [Column(TypeName = "json")]
     public string? Options { get; set; }
+    public StatusType Status { get; set; }
 }

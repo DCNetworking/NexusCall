@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using nexus_connect.Models;
+using nexus_connect.ViewModels;
 
 namespace nexus_connect.Controllers;
 
@@ -13,7 +14,7 @@ public class HomeController : Controller
         _logger = logger;
     }
 
-    public IActionResult Index()
+    public IActionResult Index(ClientViewModel model)
     {
         return View();
     }

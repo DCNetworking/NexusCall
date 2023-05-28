@@ -6,7 +6,7 @@ using nexus_connect.Data.Entities;
 public class NexusConnectContext : IdentityDbContext<StoreUser>
 {
     public DbSet<Client> Client { get; set; }
-    
+
     public NexusConnectContext(DbContextOptions<NexusConnectContext> options) : base(options)
     {
     }
@@ -19,7 +19,8 @@ public class NexusConnectContext : IdentityDbContext<StoreUser>
                 Name = "E-Bay",
                 CreatedTime = DateTimeOffset.UtcNow.ToUnixTimeSeconds(),
                 LastChangeTime = 0,
-                LocalUrl = "ebay"
+                LocalUrl = "ebay",
+                Status = Data.StatusType.Active
             }
         );
         base.OnModelCreating(modelBuilder);
