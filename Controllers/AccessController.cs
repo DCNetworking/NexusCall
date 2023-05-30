@@ -33,7 +33,14 @@ public class AccessController : Controller
         }
         return View();
     }
-
+    public IActionResult Signup()
+    {
+        if (this.User.Identity.IsAuthenticated)
+        {
+            return RedirectToAction("Index", "Home");
+        }
+        return View();
+    }
 
     public async Task<IActionResult> Logout()
     {
@@ -64,6 +71,42 @@ public class AccessController : Controller
             }
         }
         ModelState.AddModelError("", "Failed to login");
+        return View();
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Signup(SignUpViewModel model)
+    {
+        if (ModelState.IsValid)
+        {
+            var NewUser = new StoreUser()
+            {
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                Email = model.Username,
+                UserName = model.Username,
+                Permission = Data.PermissionType.Operator,
+                Status = Data.StatusType.Active
+            };
+            if (await _userManager.FindByNameAsync(NewUser.UserName) != null)
+            {
+                ViewBag.ErrorMessage = $"User {model.Username} Already Exists";
+                return View(model);
+            }
+            var result = await _userManager.CreateAsync(NewUser, model.Password);
+            if (result.Succeeded)
+            {
+                if (Request.Query.Keys.Contains("ReturnUrl"))
+                {
+                    return Redirect(Request.Query["ReturnUrl"].First());
+                }
+                else
+                {
+                    return RedirectToAction("Login", "Access");
+                }
+            }
+        }
+        ModelState.AddModelError("", "Failed to signup");
         return View();
     }
 }

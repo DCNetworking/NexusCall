@@ -18,7 +18,6 @@ public class RedirectMiddleware
             context.Response.Redirect("/Access/Login");
             return;
         }
-
         // Continue processing the request
         await _next(context);
     }
