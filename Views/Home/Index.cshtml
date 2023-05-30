@@ -1,27 +1,40 @@
-﻿@model  IEnumerable<ClientViewModel>
+﻿@model IEnumerable<ClientViewModel>
 @{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="<div class="container-fluid">
-    <h2>Partners</h2>
- <table class="table table-bordered">
-  <thead>
-    <tr>
-      <th scope="col">Id</th>
-      <th scope="col">Name</th>
-      <th scope="col">CreatedDate</th>
-    </tr>
-  </thead>
-    <tbody>
-    @foreach (var item in Model)
-    {
-    <tr>
-      <th scope="row">@item.Id</th>
-      <td>@item.Name</td>
-      <td>@item.CreatedTime</td>
-    </tr>
-    }
-    </tbody>
- </table>
-</div>
+@section MainContainer {
+        <h2>Partners</h2>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">CreatedDate</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <th scope="row">@item.Id</th>
+                        <td>@item.Name</td>
+                        <td>@item.CreatedTime</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+}
+
+@section LeftSideBar{
+    <div class="card" style="width: 18rem;">
+        <div class="card-header">
+            Featured
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">An item</li>
+            <li class="list-group-item">A second item</li>
+            <li class="list-group-item">A third item</li>
+        </ul>
+    </div>
+}

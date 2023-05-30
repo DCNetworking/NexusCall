@@ -19,7 +19,6 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        @if(User.Identity.IsAuthenticated){
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
@@ -32,19 +31,21 @@
                         <li class="nav-item ml-auto">
                             <a class="nav-link text-primary" asp-area="" asp-controller="Home" asp-action="Index">@User.Identity.Name</a>
                         </li>
-                        }else{
-                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Access" asp-action="Login">Login</a>
-                        </li>
-                        }
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
+    <div class="container-fluid">
+        <main role="main" class="p-2">
+            <div class="row">
+                <div class="col-md-4">
+                    @RenderSection("LeftSideBar", required: false)
+                </div>
+                <div class="col-8">
+                    @RenderSection("MainContainer", required:true)
+                </div>
+            </div>
         </main>
     </div>
 
