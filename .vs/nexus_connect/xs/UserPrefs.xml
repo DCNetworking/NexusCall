@@ -1,4 +1,32 @@
 ﻿<Properties GitUserInfo="UsingGIT" StartupConfiguration="{A663FF2C-2F75-4313-B8F0-90390249DDD0}|https">
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.Workbench ActiveDocument="Views/Home/Index.cshtml">
+    <Files>
+      <File FileName="ViewModels/SignUpViewModel.cs" Line="1" Column="1" />
+      <File FileName="ViewModels/LoginViewModel.cs" Line="1" Column="1" />
+      <File FileName="Views/_ViewStart.cshtml" Line="2" Column="24" />
+      <File FileName="Views/_ViewImports.cshtml" Line="1" Column="1" />
+      <File FileName="Views/Shared/_Layout.cshtml" Line="33" Column="16" />
+      <File FileName="Views/Shared/_LoggedLayout.cshtml" Line="42" Column="37" />
+      <File FileName="Views/Home/Index.cshtml" Line="5" Column="5" />
+      <File FileName="Views/Home/Privacy.cshtml" Line="7" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="nexus_connect" expanded="True">
+            <Node name="nexus_connect" expanded="True">
+              <Node name="Controllers" expanded="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
   <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.ItemProperties.nexus__connect PreferredExecutionTarget="/Applications/Firefox.app" />
 </Properties>
