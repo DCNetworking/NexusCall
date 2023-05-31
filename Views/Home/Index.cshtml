@@ -4,37 +4,14 @@
 }
 
 @section MainContainer {
-        <h2>Partners</h2>
-        <table class="table" style="width: 100%;">
-            <thead>
-                <tr>
-                    <th scope="col">Id</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">CreatedDate</th>
-                </tr>
-            </thead>
-            <tbody>
+        <h2>Assigned projects</h2>
                 @foreach (var item in Model)
                 {
-                    <tr>
-                        <th scope="row">@item.Id</th>
-                        <td>@item.Name</td>
-                        <td>@item.CreatedTime</td>
-                    </tr>
+                  <div class="jumbotron jumbotron-fluid border mb-2">
+                  <div class="container">
+                        <h1 class="display-4">@item.Name</h1>
+                        <p class="lead"><a href="#" class="btn btn-primary">Enter</a></p>
+                  </div>
+                  </div>
                 }
-            </tbody>
-        </table>
-}
-
-@section LeftSideBar{
-    <div class="card" style="width: 100%;">
-        <div class="card-header">
-            Featured
-        </div>
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item">An item</li>
-            <li class="list-group-item">A second item</li>
-            <li class="list-group-item">A third item</li>
-        </ul>
-    </div>
 }

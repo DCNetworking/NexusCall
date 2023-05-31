@@ -1,0 +1,22 @@
+@model MyAccountViewModel;
+@{
+    ViewData["title"] = "My Account";
+    var properties = typeof(MyAccountViewModel).GetProperties();
+}
+
+@section MainContainer {
+<form>
+    <div class="form-group row align-self-center" style="width:40%;">
+ @foreach (var property in properties)
+{
+    var value = property.GetValue(Model);
+    var name = $"{property.Name}";
+    <div class="flex p-2" style="gap:1rem;">
+    <label style="flex-grow: 2;">@property.Name</label>
+    @Html.TextBox(name, value, new { @class = "form-control" , @disabled = true, @style="flex-grow: 3;"})
+    </div>
+}
+    </div>
+</form>
+
+}
