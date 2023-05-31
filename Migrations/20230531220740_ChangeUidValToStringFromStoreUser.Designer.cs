@@ -11,8 +11,8 @@ using nexus_connect.DbContext;
 namespace nexus_connect.Migrations
 {
     [DbContext(typeof(NexusConnectContext))]
-    [Migration("20230528181439_CreateTicketEnitity")]
-    partial class CreateTicketEnitity
+    [Migration("20230531220740_ChangeUidValToStringFromStoreUser")]
+    partial class ChangeUidValToStringFromStoreUser
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -180,7 +180,7 @@ namespace nexus_connect.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedTime = 1685297679L,
+                            CreatedTime = 1685570860L,
                             LastChangeTime = 0L,
                             LocalUrl = "ebay",
                             Name = "E-Bay",
@@ -189,7 +189,7 @@ namespace nexus_connect.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedTime = 1685296679L,
+                            CreatedTime = 1685569860L,
                             LastChangeTime = 0L,
                             LocalUrl = "tdj",
                             Name = "TDJ Developer",
@@ -243,6 +243,9 @@ namespace nexus_connect.Migrations
                     b.Property<string>("PasswordHash")
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("Permission")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("TEXT");
 
@@ -251,6 +254,9 @@ namespace nexus_connect.Migrations
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("TEXT");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("INTEGER");
 
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("INTEGER");
@@ -277,10 +283,7 @@ namespace nexus_connect.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("Cid")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("ClientId")
+                    b.Property<int>("ClientId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("LogHistory")
@@ -302,14 +305,10 @@ namespace nexus_connect.Migrations
                     b.Property<long>("TicketLastChangeTime")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("UserId")
+                    b.Property<string>("Uid")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ClientId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Ticket");
 
@@ -317,24 +316,24 @@ namespace nexus_connect.Migrations
                         new
                         {
                             Id = 1,
-                            Cid = 1,
+                            ClientId = 1,
                             LogHistory = "",
                             RelId = 0,
                             TicketCaseType = 3,
-                            TicketCreatedTime = 1685297679L,
+                            TicketCreatedTime = 1685570860L,
                             TicketEndTime = 0L,
-                            TicketLastChangeTime = 1685297679L
+                            TicketLastChangeTime = 1685570860L
                         },
                         new
                         {
                             Id = 2,
-                            Cid = 1,
+                            ClientId = 1,
                             LogHistory = "",
                             RelId = 0,
                             TicketCaseType = 2,
-                            TicketCreatedTime = 1685295879L,
+                            TicketCreatedTime = 1685569060L,
                             TicketEndTime = 0L,
-                            TicketLastChangeTime = 1685295879L
+                            TicketLastChangeTime = 1685569060L
                         });
                 });
 
@@ -387,21 +386,6 @@ namespace nexus_connect.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("nexus_connect.Data.Entities.Ticket", b =>
-                {
-                    b.HasOne("nexus_connect.Data.Entities.Client", "Client")
-                        .WithMany()
-                        .HasForeignKey("ClientId");
-
-                    b.HasOne("nexus_connect.Data.Entities.StoreUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("Client");
-
-                    b.Navigation("User");
                 });
 #pragma warning restore 612, 618
         }

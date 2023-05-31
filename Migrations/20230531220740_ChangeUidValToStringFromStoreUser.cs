@@ -3,10 +3,12 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace nexus_connect.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class ChangeUidValToStringFromStoreUser : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -30,6 +32,8 @@ namespace nexus_connect.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "TEXT", nullable: false),
+                    Status = table.Column<int>(type: "INTEGER", nullable: false),
+                    Permission = table.Column<int>(type: "INTEGER", nullable: false),
                     FirstName = table.Column<string>(type: "TEXT", maxLength: 255, nullable: false),
                     LastName = table.Column<string>(type: "TEXT", maxLength: 255, nullable: false),
                     UserName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
@@ -62,11 +66,32 @@ namespace nexus_connect.Migrations
                     Name = table.Column<string>(type: "TEXT", nullable: true),
                     CreatedTime = table.Column<long>(type: "INTEGER", nullable: false),
                     LastChangeTime = table.Column<long>(type: "INTEGER", nullable: false),
-                    Options = table.Column<string>(type: "json", nullable: true)
+                    Options = table.Column<string>(type: "json", nullable: true),
+                    Status = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Client", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Ticket",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    RelId = table.Column<int>(type: "INTEGER", nullable: false),
+                    TicketCreatedTime = table.Column<long>(type: "INTEGER", nullable: false),
+                    TicketEndTime = table.Column<long>(type: "INTEGER", nullable: false),
+                    TicketLastChangeTime = table.Column<long>(type: "INTEGER", nullable: false),
+                    ClientId = table.Column<int>(type: "INTEGER", nullable: false),
+                    TicketCaseType = table.Column<int>(type: "INTEGER", nullable: false),
+                    LogHistory = table.Column<string>(type: "json", nullable: false),
+                    Uid = table.Column<string>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Ticket", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -177,8 +202,21 @@ namespace nexus_connect.Migrations
 
             migrationBuilder.InsertData(
                 table: "Client",
-                columns: new[] { "Id", "CreatedTime", "LastChangeTime", "LocalUrl", "Name", "Options" },
-                values: new object[] { 1, 1685276646L, 0L, "ebay", "E-Bay", null });
+                columns: new[] { "Id", "CreatedTime", "LastChangeTime", "LocalUrl", "Name", "Options", "Status" },
+                values: new object[,]
+                {
+                    { 1, 1685570860L, 0L, "ebay", "E-Bay", null, 1 },
+                    { 2, 1685569860L, 0L, "tdj", "TDJ Developer", null, 1 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Ticket",
+                columns: new[] { "Id", "ClientId", "LogHistory", "RelId", "TicketCaseType", "TicketCreatedTime", "TicketEndTime", "TicketLastChangeTime", "Uid" },
+                values: new object[,]
+                {
+                    { 1, 1, "", 0, 3, 1685570860L, 0L, 1685570860L, null },
+                    { 2, 1, "", 0, 2, 1685569060L, 0L, 1685569060L, null }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -238,6 +276,9 @@ namespace nexus_connect.Migrations
 
             migrationBuilder.DropTable(
                 name: "Client");
+
+            migrationBuilder.DropTable(
+                name: "Ticket");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

@@ -9,6 +9,8 @@ using nexus_connect.Data.Entities;
 public class NexusConnectContext : IdentityDbContext<StoreUser>
 {
     public DbSet<Client> Client { get; set; }
+    public DbSet<UserClient> UserClient { get; set; }
+    public DbSet<Ticket> Ticket { get; set; }
     public NexusConnectContext(DbContextOptions<NexusConnectContext> options) : base(options)
     {
 
@@ -36,6 +38,20 @@ public class NexusConnectContext : IdentityDbContext<StoreUser>
                  Status = Data.StatusType.Active
              }
         );
+        modelBuilder.Entity<UserClient>().HasData(
+            new UserClient()
+            {
+                Id = 1,
+                Uid = "53c8d500-2936-4aa6-8d38-f3b03c34c903",
+                AccessGivenUid = "53c8d500-2936-4aa6-8d38-f3b03c34c903",
+                ClientId = 1,
+                CreatedTimestamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds(),
+                LastChangeTimestamp = 0,
+                Status = Data.StatusType.Active,
+                BannedTimestamp = 0,
+                AccessPermission = Data.PermissionType.Operator
+            }
+        );
         modelBuilder.Entity<Ticket>().HasData(
             new Ticket()
             {
@@ -43,7 +59,7 @@ public class NexusConnectContext : IdentityDbContext<StoreUser>
                 TicketCreatedTime = DateTimeOffset.UtcNow.ToUnixTimeSeconds(),
                 TicketEndTime = 0,
                 TicketLastChangeTime = DateTimeOffset.UtcNow.ToUnixTimeSeconds(),
-                Cid = 1,
+                ClientId = 1,
                 TicketCaseType = Data.TicketCaseType.AccountAccess
             },
             new Ticket()
@@ -52,7 +68,7 @@ public class NexusConnectContext : IdentityDbContext<StoreUser>
                 TicketCreatedTime = DateTimeOffset.UtcNow.ToUnixTimeSeconds() - 1800,
                 TicketEndTime = 0,
                 TicketLastChangeTime = DateTimeOffset.UtcNow.ToUnixTimeSeconds() - 1800,
-                Cid = 1,
+                ClientId = 1,
                 TicketCaseType = Data.TicketCaseType.BillingInquiry
             }
         );

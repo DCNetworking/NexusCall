@@ -13,6 +13,11 @@ namespace nexus_connect.Profiles
         public UserProfile()
         {
             CreateMap<StoreUser, MyAccountViewModel>();
+            CreateMap<SignUpViewModel, StoreUser>()
+                .ForMember(dest => dest.FirstName, opt => opt.MapFrom(src => src.FirstName))
+                .ForMember(dest => dest.LastName, opt => opt.MapFrom(src => src.LastName))
+                .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Username))
+                .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.Username));
         }
     }
 }

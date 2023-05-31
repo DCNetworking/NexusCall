@@ -1,15 +1,10 @@
-using System.Data.Common;
-using System.Data;
-using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using nexus_connect.Data.Entities;
 using nexus_connect.ViewModels;
+using nexus_connect.Data.DefaultSettings;
+using AutoMapper;
 
 namespace nexus_connect.Controllers;
 
@@ -17,10 +12,14 @@ namespace nexus_connect.Controllers;
 public class AccessController : Controller
 {
     private readonly ILogger<AccessController> _logger;
+    private readonly ISession _session;
+    readonly IMapper _mapper;
     readonly SignInManager<StoreUser> _signInManager;
     readonly UserManager<StoreUser> _userManager;
-    public AccessController(ILogger<AccessController> logger, SignInManager<StoreUser> signInManager, UserManager<StoreUser> userManager)
+    public AccessController(ILogger<AccessController> logger, SignInManager<StoreUser> signInManager, UserManager<StoreUser> userManager, IHttpContextAccessor httpContextAccessor, IMapper mapper)
     {
+        _mapper = mapper;
+        _session = httpContextAccessor.HttpContext.Session;
         _userManager = userManager;
         _signInManager = signInManager;
         _logger = logger;
@@ -29,7 +28,9 @@ public class AccessController : Controller
     {
         if (this.User.Identity.IsAuthenticated)
         {
+
             return RedirectToAction("Index", "Home");
+
         }
         return View();
     }
@@ -79,15 +80,10 @@ public class AccessController : Controller
     {
         if (ModelState.IsValid)
         {
-            var NewUser = new StoreUser()
-            {
-                FirstName = model.FirstName,
-                LastName = model.LastName,
-                Email = model.Username,
-                UserName = model.Username,
-                Permission = Data.PermissionType.Operator,
-                Status = Data.StatusType.Active
-            };
+            StoreUser? NewUser = _mapper.Map<StoreUser>(model);
+            UserDefaults? Defaults = new UserDefaults();
+            NewUser.Status = Defaults.DefaultStatus;
+            NewUser.Permission = Defaults.DefaultPermission;
             if (await _userManager.FindByNameAsync(NewUser.UserName) != null)
             {
                 ViewBag.ErrorMessage = $"User {model.Username} Already Exists";
@@ -96,13 +92,14 @@ public class AccessController : Controller
             var result = await _userManager.CreateAsync(NewUser, model.Password);
             if (result.Succeeded)
             {
+                await _signInManager.PasswordSignInAsync(model.Username, model.Password, false, false);
                 if (Request.Query.Keys.Contains("ReturnUrl"))
                 {
                     return Redirect(Request.Query["ReturnUrl"].First());
                 }
                 else
                 {
-                    return RedirectToAction("Login", "Access");
+                    return RedirectToAction("Index", "Home");
                 }
             }
         }

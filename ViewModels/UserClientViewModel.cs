@@ -5,12 +5,13 @@ using System.Threading.Tasks;
 
 namespace nexus_connect.ViewModels
 {
-    public class ClientViewModel
+    public class UserClientViewModel
     {
         public int Id { get; set; }
         public string? Name { get; set; }
-        public long CreatedTime { get; set; }
-        public long LastChangeTime { get; set; }
+        public long CreatedTimestamp { get; set; }
+        public long LastChangeTimestamp { get; set; }
+        public Data.PermissionType AccessPermission { get; set; }
 
     }
 }

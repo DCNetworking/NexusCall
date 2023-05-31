@@ -5,16 +5,20 @@ using nexus_connect.Models;
 using nexus_connect.ViewModels;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using nexus_connect.Data.Entities;
 
 namespace nexus_connect.Controllers;
 
 public class HomeController : Controller
 {
     readonly IMapper _mapper;
+    readonly UserManager<StoreUser> _userManager;
     readonly ILogger<HomeController> _logger;
     readonly INexusConnectRepository _repository;
-    public HomeController(ILogger<HomeController> logger, INexusConnectRepository repository, IMapper mapper)
+    public HomeController(ILogger<HomeController> logger, INexusConnectRepository repository, IMapper mapper, UserManager<StoreUser> userManager)
     {
+        _userManager = userManager;
         _mapper = mapper;
         _logger = logger;
         _repository = repository;
@@ -25,8 +29,10 @@ public class HomeController : Controller
         {
             return RedirectToAction("Login", "Access");
         }
-        var clientsAsync = await _repository.GetAllClientsAsync();
-        var results = _mapper.Map<IEnumerable<ClientViewModel>>(clientsAsync);
+        var user = await _userManager.FindByNameAsync(userName: User.Identity.Name);
+        var userId = await _userManager.GetUserIdAsync(user);
+        var clientsAsync = await _repository.GetUserClientsView(userId);
+        var results = _mapper.Map<IEnumerable<UserClientViewModel>>(clientsAsync);
         return View(results);
     }
 

@@ -177,7 +177,7 @@ namespace nexus_connect.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedTime = 1685479164L,
+                            CreatedTime = 1685571156L,
                             LastChangeTime = 0L,
                             LocalUrl = "ebay",
                             Name = "E-Bay",
@@ -186,7 +186,7 @@ namespace nexus_connect.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedTime = 1685478164L,
+                            CreatedTime = 1685570156L,
                             LastChangeTime = 0L,
                             LocalUrl = "tdj",
                             Name = "TDJ Developer",
@@ -280,10 +280,7 @@ namespace nexus_connect.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("Cid")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("ClientId")
+                    b.Property<int>("ClientId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("LogHistory")
@@ -305,14 +302,10 @@ namespace nexus_connect.Migrations
                     b.Property<long>("TicketLastChangeTime")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("UserId")
+                    b.Property<string>("Uid")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ClientId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Ticket");
 
@@ -320,24 +313,73 @@ namespace nexus_connect.Migrations
                         new
                         {
                             Id = 1,
-                            Cid = 1,
+                            ClientId = 1,
                             LogHistory = "",
                             RelId = 0,
                             TicketCaseType = 3,
-                            TicketCreatedTime = 1685479164L,
+                            TicketCreatedTime = 1685571156L,
                             TicketEndTime = 0L,
-                            TicketLastChangeTime = 1685479164L
+                            TicketLastChangeTime = 1685571156L
                         },
                         new
                         {
                             Id = 2,
-                            Cid = 1,
+                            ClientId = 1,
                             LogHistory = "",
                             RelId = 0,
                             TicketCaseType = 2,
-                            TicketCreatedTime = 1685477364L,
+                            TicketCreatedTime = 1685569356L,
                             TicketEndTime = 0L,
-                            TicketLastChangeTime = 1685477364L
+                            TicketLastChangeTime = 1685569356L
+                        });
+                });
+
+            modelBuilder.Entity("nexus_connect.Data.Entities.UserClient", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("AccessGivenUid")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("AccessPermission")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<long>("BannedTimestamp")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ClientId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<long>("CreatedTimestamp")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<long>("LastChangeTimestamp")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Uid")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("UserClient");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AccessGivenUid = "53c8d500-2936-4aa6-8d38-f3b03c34c903",
+                            AccessPermission = 10,
+                            BannedTimestamp = 0L,
+                            ClientId = 1,
+                            CreatedTimestamp = 1685571156L,
+                            LastChangeTimestamp = 0L,
+                            Status = 1,
+                            Uid = "53c8d500-2936-4aa6-8d38-f3b03c34c903"
                         });
                 });
 
@@ -390,21 +432,6 @@ namespace nexus_connect.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("nexus_connect.Data.Entities.Ticket", b =>
-                {
-                    b.HasOne("nexus_connect.Data.Entities.Client", "Client")
-                        .WithMany()
-                        .HasForeignKey("ClientId");
-
-                    b.HasOne("nexus_connect.Data.Entities.StoreUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("Client");
-
-                    b.Navigation("User");
                 });
 #pragma warning restore 612, 618
         }

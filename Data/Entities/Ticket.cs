@@ -16,12 +16,12 @@ namespace nexus_connect.Data.Entities
         public long TicketCreatedTime { get; set; }
         public long TicketEndTime { get; set; }
         public long TicketLastChangeTime { get; set; }
-        [ForeignKey("Cid")]
-        public int Cid { get; set; }
-        public Client? Client { get; set; }
+        [ForeignKey("Client")]
+        public int ClientId { get; set; }
         public TicketCaseType TicketCaseType { get; set; }
         [Column(TypeName = "json")]
         public string LogHistory { get; set; } = string.Empty;
-        public StoreUser? User { get; set; }
+        [ForeignKey("StoreUser")]
+        public string? Uid { get; set; }
     }
 }

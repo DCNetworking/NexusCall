@@ -11,8 +11,8 @@ using nexus_connect.DbContext;
 namespace nexus_connect.Migrations
 {
     [DbContext(typeof(NexusConnectContext))]
-    [Migration("20230528125420_AddStatusForClient")]
-    partial class AddStatusForClient
+    [Migration("20230531221236_UserClientSample")]
+    partial class UserClientSample
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -180,10 +180,19 @@ namespace nexus_connect.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedTime = 1685278460L,
+                            CreatedTime = 1685571156L,
                             LastChangeTime = 0L,
                             LocalUrl = "ebay",
                             Name = "E-Bay",
+                            Status = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedTime = 1685570156L,
+                            LastChangeTime = 0L,
+                            LocalUrl = "tdj",
+                            Name = "TDJ Developer",
                             Status = 1
                         });
                 });
@@ -234,6 +243,9 @@ namespace nexus_connect.Migrations
                     b.Property<string>("PasswordHash")
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("Permission")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("TEXT");
 
@@ -242,6 +254,9 @@ namespace nexus_connect.Migrations
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("TEXT");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("INTEGER");
 
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("INTEGER");
@@ -260,6 +275,115 @@ namespace nexus_connect.Migrations
                         .HasDatabaseName("UserNameIndex");
 
                     b.ToTable("AspNetUsers", (string)null);
+                });
+
+            modelBuilder.Entity("nexus_connect.Data.Entities.Ticket", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ClientId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("LogHistory")
+                        .IsRequired()
+                        .HasColumnType("json");
+
+                    b.Property<int>("RelId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("TicketCaseType")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<long>("TicketCreatedTime")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<long>("TicketEndTime")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<long>("TicketLastChangeTime")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Uid")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Ticket");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ClientId = 1,
+                            LogHistory = "",
+                            RelId = 0,
+                            TicketCaseType = 3,
+                            TicketCreatedTime = 1685571156L,
+                            TicketEndTime = 0L,
+                            TicketLastChangeTime = 1685571156L
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ClientId = 1,
+                            LogHistory = "",
+                            RelId = 0,
+                            TicketCaseType = 2,
+                            TicketCreatedTime = 1685569356L,
+                            TicketEndTime = 0L,
+                            TicketLastChangeTime = 1685569356L
+                        });
+                });
+
+            modelBuilder.Entity("nexus_connect.Data.Entities.UserClient", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("AccessGivenUid")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("AccessPermission")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<long>("BannedTimestamp")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ClientId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<long>("CreatedTimestamp")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<long>("LastChangeTimestamp")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Uid")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("UserClient");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AccessGivenUid = "53c8d500-2936-4aa6-8d38-f3b03c34c903",
+                            AccessPermission = 10,
+                            BannedTimestamp = 0L,
+                            ClientId = 1,
+                            CreatedTimestamp = 1685571156L,
+                            LastChangeTimestamp = 0L,
+                            Status = 1,
+                            Uid = "53c8d500-2936-4aa6-8d38-f3b03c34c903"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

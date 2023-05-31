@@ -12,7 +12,7 @@ namespace nexus_connect.Profiles
     {
         public ClientProfile()
         {
-            CreateMap<Client, ClientViewModel>();
+            CreateMap<Client, UserClientViewModel>();
         }
     }
 }
