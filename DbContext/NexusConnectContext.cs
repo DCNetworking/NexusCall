@@ -26,7 +26,8 @@ public class NexusConnectContext : IdentityDbContext<StoreUser>
                 CreatedTime = DateTimeOffset.UtcNow.ToUnixTimeSeconds(),
                 LastChangeTime = 0,
                 LocalUrl = "ebay",
-                Status = Data.StatusType.Active
+                Status = Data.StatusType.Active,
+                ColorAccent = "rgb(50, 17, 69)"
             },
              new Client()
              {
@@ -35,7 +36,8 @@ public class NexusConnectContext : IdentityDbContext<StoreUser>
                  CreatedTime = DateTimeOffset.UtcNow.ToUnixTimeSeconds() - 1000,
                  LastChangeTime = 0,
                  LocalUrl = "tdj",
-                 Status = Data.StatusType.Active
+                 Status = Data.StatusType.Active,
+                 ColorAccent = "rgb(146,201,3)"
              }
         );
         modelBuilder.Entity<UserClient>().HasData(
@@ -50,6 +52,18 @@ public class NexusConnectContext : IdentityDbContext<StoreUser>
                 Status = Data.StatusType.Active,
                 BannedTimestamp = 0,
                 AccessPermission = Data.PermissionType.Operator
+            },
+            new UserClient()
+            {
+                Id = 2,
+                Uid = "53c8d500-2936-4aa6-8d38-f3b03c34c903",
+                AccessGivenUid = "53c8d500-2936-4aa6-8d38-f3b03c34c903",
+                ClientId = 2,
+                CreatedTimestamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds(),
+                LastChangeTimestamp = 0,
+                Status = Data.StatusType.Active,
+                BannedTimestamp = 0,
+                AccessPermission = Data.PermissionType.Administrator
             }
         );
         modelBuilder.Entity<Ticket>().HasData(

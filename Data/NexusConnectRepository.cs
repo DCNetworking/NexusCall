@@ -65,7 +65,8 @@ namespace nexus_connect.Data
                LastChangeTimestamp = joinResult.UserClient.LastChangeTimestamp,
                AccessPermission = joinResult.UserClient.AccessPermission,
                Name = joinResult.Client.Name,
-               Id = joinResult.Client.Id
+               Id = joinResult.Client.Id,
+               ColorAccent = joinResult.Client.ColorAccent
            })
            .ToListAsync();
             return clients;

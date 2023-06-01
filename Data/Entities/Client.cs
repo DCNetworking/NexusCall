@@ -18,4 +18,5 @@ public class Client
     [Column(TypeName = "json")]
     public string? Options { get; set; }
     public StatusType Status { get; set; }
+    public string? ColorAccent { get; set; }
 }

@@ -1,15 +1,8 @@
-html {
-  font-size: 14px;
-}
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+:root{
+  --flat_blue-color : #3498db;
+  --coral-color : #ff7f50;
+  --deep_purple-color: #5f27cd;
 }
 
 html {
@@ -19,4 +12,79 @@ html {
 
 body {
   margin-bottom: 60px;
+}
+.project_container{
+  min-width: 20rem;
+  max-width: 20rem;
+  max-height: 10rem;
+
+  color:black;
+  border-radius: 10px;
+  padding:0.5rem;
+  color:white;
+
+}
+.project_permission{
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  place-self: center;
+  width: 70%;
+  min-width: max-content;
+  padding: 5px;
+  border:1px solid gray;
+  border-radius: 5px;
+}
+.project_permission .permission_name{
+  font-weight: 600;
+  font-size: 0.6rem;
+}
+.container_grid{
+  display: grid;
+  height: 100%;
+}
+.grid-2-3{
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+}
+.container_grid .project_name{
+  grid-area: 1/1/1/1;
+  font-weight: 700;
+  justify-self: start;
+  align-self: start;
+}
+.container_grid .project_entry{
+  grid-area: 2/1/2/1;
+  justify-self: start;
+  align-self: end;
+}
+.container_grid .project_datetime{
+  grid-area: 2/2/2/2;
+  place-self: center;
+  justify-self: end;
+  align-self: end;
+}
+.container_grid .project_permission{
+  grid-area: 1/2/1/2;
+  justify-self: end;
+  align-self: start;
+}
+.project_permission-Operator{
+  background-color: #ffffff;
+  color:var(--deep_purple-color);
+  border-color: var(--deep_purple-color);
+}
+.project_permission-Administrator{
+  background-color: black;
+  color:white;
+  border-color: #ffffff;
+}
+.btn-entry{
+  background-color: var(--flat_blue-color);
+  transition: background-color 0.2s ease-in-out;
+  color:white;
+}
+.btn-entry:hover{
+  background-color: var(--coral-color);
+  color:white;
 }

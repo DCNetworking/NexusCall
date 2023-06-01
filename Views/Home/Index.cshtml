@@ -6,29 +6,27 @@
 
 @section MainContainer {
         <h2>Assigned projects</h2>
+        <section class="d-flex gap-3">
         @if(Model.Count() > 0){
             @foreach (var item in Model)
             {
+                Console.WriteLine(@item.ColorAccent);
                 string createdDate = TimeConverter.TimeStampToDateWithTimeZone(item.CreatedTimestamp);
-                <div class="jumbotron jumbotron-fluid border mb-2 bg-dark text-white w-25">
-                  <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-sm-6">
-                               <h1 class="display-5">@item.Name</h1>
-                            </div>  
-                            <div class="col-sm-6" style="text-align: center;">
-                                <p style="font-size: 0.9rem;text-align: center;">Permission : @item.AccessPermission</p>
+                <div style="border-left: 10px solid @item.ColorAccent ;   background: linear-gradient(297deg,  rgba(95,39,205,1)  0%, @item.ColorAccent 100%);" class="project_container">
+                  <div class="container_grid grid-2-3">
+                        <div class="project_name">
+                            <h3 class="display-10">@item.Name</h3>
+                        </div> 
+                        <div class="project_entry"> 
+                            <p class="lead"><a href="#" class="btn btn-entry">Enter</a></p>
+                        </div>
+                        <div class="project_datetime">
+                                <p  style="font-size: 0.6rem;text-align: center;">Access granted date : @createdDate</p>
+                            </div>
+                         <div class="project_permission project_permission-@item.AccessPermission" style="text-align: center;">
+                               <span class="permission_name permission_name-@item.AccessPermission">@item.AccessPermission</span>
                             </div>
                         </div>
-                            <div class="row">
-                            <div class="col-sm-6"> 
-                                <p class="lead"><a href="#" class="btn btn-primary">Enter</a></p>
-                            </div>
-                            <div class="col-sm-6 bg-transparent">
-                                <p  style="font-size: 0.6rem;text-align: center;">Acces started from : @createdDate</p>
-                            </div>
-                        </div>
-                    </div>
                 </div>
                 }
         }else{
@@ -38,4 +36,5 @@
                     </div>
             </div>
         }
+        </section>
 }

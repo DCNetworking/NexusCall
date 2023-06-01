@@ -13,5 +13,6 @@ namespace nexus_connect.ViewModels
         public long LastChangeTimestamp { get; set; }
         public Data.PermissionType AccessPermission { get; set; }
 
+        public string? ColorAccent { get; set; }
     }
 }
