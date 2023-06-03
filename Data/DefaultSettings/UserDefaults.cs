@@ -9,5 +9,6 @@ namespace nexus_connect.Data.DefaultSettings
     {
         public Data.StatusType DefaultStatus => Data.StatusType.Active;
         public Data.PermissionType DefaultPermission => Data.PermissionType.Operator;
+        public int DefaultTeam => 1;
     }
 }

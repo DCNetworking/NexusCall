@@ -84,6 +84,7 @@ public class AccessController : Controller
             UserDefaults? Defaults = new UserDefaults();
             NewUser.Status = Defaults.DefaultStatus;
             NewUser.Permission = Defaults.DefaultPermission;
+            NewUser.TeamId = Defaults.DefaultTeam;
             if (await _userManager.FindByNameAsync(NewUser.UserName) != null)
             {
                 ViewBag.ErrorMessage = $"User {model.Username} Already Exists";

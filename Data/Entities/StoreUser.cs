@@ -1,6 +1,7 @@
 
 
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNetCore.Identity;
 namespace nexus_connect.Data.Entities;
 public class StoreUser : IdentityUser
@@ -18,4 +19,7 @@ public class StoreUser : IdentityUser
     [MaxLength(255)]
     [Required]
     public string? LastName { get; set; }
+    [Required]
+    [ForeignKey("TeamId")]
+    public int TeamId { get; set; }
 }

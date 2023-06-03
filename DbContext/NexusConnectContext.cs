@@ -86,6 +86,17 @@ public class NexusConnectContext : IdentityDbContext<StoreUser>
                 TicketCaseType = Data.TicketCaseType.BillingInquiry
             }
         );
+        modelBuilder.Entity<Team>().HasData(
+            new Team()
+            {
+                Id = 1,
+                Uid = "53c8d500-2936-4aa6-8d38-f3b03c34c903",
+                Name = "Alfa Delta Team",
+                CreatedTimestamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds(),
+                Cid = 1,
+                Status = Data.StatusType.Active
+            }
+        );
 
     }
 }
