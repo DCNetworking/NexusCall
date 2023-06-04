@@ -109,7 +109,9 @@ public class NexusConnectContext : IdentityDbContext<StoreUser>
                  Title = "test Message",
                  Message = "Alfa Delta Team, Go !",
                  CreatedTimestamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds(),
+                 DisplayTimestamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds(),
                  Cid = 1,
+                 Important = true,
                  ReadedTimeStamp = 0
              },
              new Notification()
@@ -120,7 +122,22 @@ public class NexusConnectContext : IdentityDbContext<StoreUser>
                  Title = "Second test",
                  Message = "Alfa Delta Team, Go Go Go!",
                  CreatedTimestamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds(),
+                 DisplayTimestamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds() + 30,
                  Cid = 0,
+                 Important = false,
+                 ReadedTimeStamp = 0
+             },
+             new Notification()
+             {
+                 Id = 3,
+                 Uid = "53c8d500-2936-4aa6-8d38-f3b03c34c903",
+                 CreatedUid = "53c8d500-2936-4aa6-8d38-f3b03c34c903",
+                 Title = "Webinar : Git can be better",
+                 Message = "Make a Better Git Commits - Webinar",
+                 CreatedTimestamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds() - 1000,
+                 DisplayTimestamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds(),
+                 Cid = 2,
+                 Important = true,
                  ReadedTimeStamp = 0
              }
          );

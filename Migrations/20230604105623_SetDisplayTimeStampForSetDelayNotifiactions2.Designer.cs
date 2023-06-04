@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using nexus_connect.DbContext;
 
@@ -10,9 +11,11 @@ using nexus_connect.DbContext;
 namespace nexus_connect.Migrations
 {
     [DbContext(typeof(NexusConnectContext))]
-    partial class NexusConnectContextModelSnapshot : ModelSnapshot
+    [Migration("20230604105623_SetDisplayTimeStampForSetDelayNotifiactions2")]
+    partial class SetDisplayTimeStampForSetDelayNotifiactions2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.5");
@@ -181,7 +184,7 @@ namespace nexus_connect.Migrations
                         {
                             Id = 1,
                             ColorAccent = "rgb(50, 17, 69)",
-                            CreatedTime = 1685876651L,
+                            CreatedTime = 1685876183L,
                             LastChangeTime = 0L,
                             LocalUrl = "ebay",
                             Name = "E-Bay",
@@ -191,7 +194,7 @@ namespace nexus_connect.Migrations
                         {
                             Id = 2,
                             ColorAccent = "rgb(146,201,3)",
-                            CreatedTime = 1685875651L,
+                            CreatedTime = 1685875183L,
                             LastChangeTime = 0L,
                             LocalUrl = "tdj",
                             Name = "TDJ Developer",
@@ -215,9 +218,6 @@ namespace nexus_connect.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<long>("DisplayTimestamp")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<bool>("Important")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Message")
@@ -245,10 +245,9 @@ namespace nexus_connect.Migrations
                         {
                             Id = 1,
                             Cid = 1,
-                            CreatedTimestamp = 1685876651L,
+                            CreatedTimestamp = 1685876183L,
                             CreatedUid = "53c8d500-2936-4aa6-8d38-f3b03c34c903",
-                            DisplayTimestamp = 1685876651L,
-                            Important = true,
+                            DisplayTimestamp = 1685876183L,
                             Message = "Alfa Delta Team, Go !",
                             ReadedTimeStamp = 0L,
                             Title = "test Message",
@@ -258,10 +257,9 @@ namespace nexus_connect.Migrations
                         {
                             Id = 2,
                             Cid = 0,
-                            CreatedTimestamp = 1685876651L,
+                            CreatedTimestamp = 1685876183L,
                             CreatedUid = "53c8d500-2936-4aa6-8d38-f3b03c34c903",
-                            DisplayTimestamp = 1685876681L,
-                            Important = false,
+                            DisplayTimestamp = 1685876213L,
                             Message = "Alfa Delta Team, Go Go Go!",
                             ReadedTimeStamp = 0L,
                             Title = "Second test",
@@ -271,10 +269,9 @@ namespace nexus_connect.Migrations
                         {
                             Id = 3,
                             Cid = 2,
-                            CreatedTimestamp = 1685875651L,
+                            CreatedTimestamp = 1685875183L,
                             CreatedUid = "53c8d500-2936-4aa6-8d38-f3b03c34c903",
-                            DisplayTimestamp = 1685876651L,
-                            Important = true,
+                            DisplayTimestamp = 1685876183L,
                             Message = "Make a Better Git Commits - Webinar",
                             ReadedTimeStamp = 0L,
                             Title = "Webinar : Git can be better",
@@ -404,7 +401,7 @@ namespace nexus_connect.Migrations
                         {
                             Id = 1,
                             Cid = 1,
-                            CreatedTimestamp = 1685876651L,
+                            CreatedTimestamp = 1685876183L,
                             CreatedUid = "53c8d500-2936-4aa6-8d38-f3b03c34c903",
                             LastChangeTimestamp = 0L,
                             Name = "Alfa Delta Team",
@@ -456,9 +453,9 @@ namespace nexus_connect.Migrations
                             LogHistory = "",
                             RelId = 0,
                             TicketCaseType = 3,
-                            TicketCreatedTime = 1685876651L,
+                            TicketCreatedTime = 1685876183L,
                             TicketEndTime = 0L,
-                            TicketLastChangeTime = 1685876651L
+                            TicketLastChangeTime = 1685876183L
                         },
                         new
                         {
@@ -467,9 +464,9 @@ namespace nexus_connect.Migrations
                             LogHistory = "",
                             RelId = 0,
                             TicketCaseType = 2,
-                            TicketCreatedTime = 1685874851L,
+                            TicketCreatedTime = 1685874383L,
                             TicketEndTime = 0L,
-                            TicketLastChangeTime = 1685874851L
+                            TicketLastChangeTime = 1685874383L
                         });
                 });
 
@@ -515,7 +512,7 @@ namespace nexus_connect.Migrations
                             AccessPermission = 10,
                             BannedTimestamp = 0L,
                             ClientId = 1,
-                            CreatedTimestamp = 1685876651L,
+                            CreatedTimestamp = 1685876183L,
                             LastChangeTimestamp = 0L,
                             Status = 1,
                             Uid = "53c8d500-2936-4aa6-8d38-f3b03c34c903"
@@ -527,7 +524,7 @@ namespace nexus_connect.Migrations
                             AccessPermission = 100,
                             BannedTimestamp = 0L,
                             ClientId = 2,
-                            CreatedTimestamp = 1685876651L,
+                            CreatedTimestamp = 1685876183L,
                             LastChangeTimestamp = 0L,
                             Status = 1,
                             Uid = "53c8d500-2936-4aa6-8d38-f3b03c34c903"

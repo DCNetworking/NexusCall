@@ -1,3 +1,4 @@
+using System.IO;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -10,6 +11,7 @@ using Microsoft.Extensions.Logging;
 using nexus_connect.Data;
 using nexus_connect.Data.Entities;
 using nexus_connect.ViewModels;
+using nexus_connect.Data.DTO;
 
 namespace nexus_connect.Controllers
 {
@@ -38,6 +40,19 @@ namespace nexus_connect.Controllers
             var user = await _userManager.GetUserAsync(User);
             var notifiactions = await _repository.GetNotifcations(user.Id);
             return PartialView("Notifications", notifiactions);
+        }
+        [HttpPost]
+        [Route("/Global/Notifications/mark-as-read")]
+        public async Task<IActionResult> NotificationsMarkAsRead([FromBody] MarkNotificationDto model)
+        {
+            Console.WriteLine("##################################### SQL ####################");
+            Console.WriteLine(model.Id);
+            Console.WriteLine("##################################### SQL ####################");
+            if (await _repository.SetNotifyAsRead(model.Id))
+            {
+                return Ok();
+            }
+            return NotFound();
         }
         public IActionResult Dashboard()
         {

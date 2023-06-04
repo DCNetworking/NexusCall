@@ -18,5 +18,6 @@ namespace nexus_connect.Data
         Task<IEnumerable<UserClientViewModel>> GetUserClientsView(string Uid);
         Task<IEnumerable<NotificationViewModel>> GetNotifcations(string Uid);
         Dictionary<string, string> GetUserNameByIds(List<string> userIds);
+        Task<Boolean> SetNotifyAsRead(int notifyId);
     }
 }

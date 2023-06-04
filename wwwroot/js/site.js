@@ -40,3 +40,27 @@
         });
     }
 });
+
+function markNotificationAsRead(Id) {
+    // Perform your desired action here
+    // You can use AJAX to send a request to the server or perform any other JavaScript action
+
+    // Example: Send a POST request to mark the notification as read
+    fetch(`Global/Notifications/mark-as-read`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ Id: Id })
+    })
+        .then(response => {
+            if (response.ok) {
+                alert("OK")
+            } else {
+                alert("FALSE")
+            }
+        })
+        .catch(error => {
+            console.error('An error occurred:', error);
+        });
+}

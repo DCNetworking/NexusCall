@@ -18,5 +18,6 @@ namespace nexus_connect.ViewModels
         public long CreatedTimestamp { get; set; }
         public int Cid { get; set; }
         public long ReadedTimeStamp { get; set; }
+        public bool Important { get; set; }
     }
 }

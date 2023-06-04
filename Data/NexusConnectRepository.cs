@@ -1,3 +1,4 @@
+using System.Net.WebSockets;
 using System.Data.Common;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ using nexus_connect.DbContext;
 using nexus_connect.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 
 namespace nexus_connect.Data
 {
@@ -81,6 +83,7 @@ namespace nexus_connect.Data
         public async Task<IEnumerable<NotificationViewModel>> GetNotifcations(string Uid)
         {
             List<Notification>? notifications = await _ctx.Notification.Where(p => p.Uid == Uid).ToListAsync();
+            notifications = notifications.Where(p => p.DisplayTimestamp <= DateTimeOffset.UtcNow.ToUnixTimeSeconds()).ToList();
             List<string?>? createdUserIds = notifications.Select(notify => notify.CreatedUid).ToList();
             Dictionary<string, string>? createdUserNames = GetUserNameByIds(createdUserIds);
             IEnumerable<NotificationViewModel>? notificationViewModels = notifications.Select(notify => new NotificationViewModel()
@@ -92,8 +95,9 @@ namespace nexus_connect.Data
                 CreatedUserName = createdUserNames[notify.CreatedUid],
                 Title = notify.Title,
                 Message = notify.Message,
-                ReadedTimeStamp = notify.ReadedTimeStamp
-            });
+                ReadedTimeStamp = notify.ReadedTimeStamp,
+                Important = notify.Important
+            }).OrderByDescending(p => p.CreatedTimestamp);
             return notificationViewModels;
         }
 
@@ -108,6 +112,20 @@ namespace nexus_connect.Data
                 userNames[missingUserId] = "anonymous";
             }
             return userNames;
+        }
+        public async Task<Boolean> SetNotifyAsRead(int notifyId)
+        {
+            var notification = await _ctx.Notification.FindAsync(notifyId);
+            if (notification != null)
+            {
+                _ctx.Database.BeginTransaction();
+                notification.ReadedTimeStamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
+                await _ctx.SaveChangesAsync();
+                _ctx.Database.CommitTransaction();
+                return true;
+            }
+
+            return false;
         }
     }
 }

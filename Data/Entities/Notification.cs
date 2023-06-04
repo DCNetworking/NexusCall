@@ -18,6 +18,7 @@ namespace nexus_connect.Data.Entities
         [MaxLength(255)]
         [Required]
         public string? Message { get; set; }
+        public long DisplayTimestamp { get; set; }
         public long CreatedTimestamp { get; set; }
         public long ReadedTimeStamp { get; set; }
         [ForeignKey("Uid")]
@@ -26,5 +27,6 @@ namespace nexus_connect.Data.Entities
         public string? CreatedUid { get; set; }
         [ForeignKey("Cid")]
         public int Cid { get; set; }
+        public bool Important { get; set; }
     }
 }
