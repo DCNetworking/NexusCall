@@ -15,8 +15,18 @@
     <PackageReference Include="AutoMapper.Extensions.EnumMapping" Version="3.1.0" />
     <PackageReference Include="AutoMapper.Extensions.ExpressionMapping" Version="6.0.4" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+    <PackageReference Include="Microsoft.AspNet.SignalR" Version="2.4.3" />
+    <PackageReference Include="Microsoft.AspNet.SignalR.Core" Version="2.4.3" />
+    <PackageReference Include="Microsoft.AspNet.SignalR.SystemWeb" Version="2.4.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Connections.Client" Version="7.0.5" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.5" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.DataAnnotations" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="7.0.5" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Common" Version="7.0.5" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Core" Version="1.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Protocols.Json" Version="7.0.5" />
+    <PackageReference Include="Microsoft.AspNetCore.WebSockets" Version="2.2.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.5">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -25,6 +35,9 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite.Core" Version="7.0.5" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="7.0.0" />
+    <PackageReference Include="System.Net.WebSockets" Version="4.3.0" />
+    <PackageReference Include="System.Net.WebSockets.Client" Version="4.3.2" />
+    <PackageReference Include="System.Net.WebSockets.WebSocketProtocol" Version="5.0.0" />
   </ItemGroup>
 
 </Project>

@@ -16,5 +16,7 @@ namespace nexus_connect.Data
         Task<IEnumerable<Client>> GetClientsByStatusAsync(int status);
         Task<IEnumerable<Client>> GetUserClients(string Uid);
         Task<IEnumerable<UserClientViewModel>> GetUserClientsView(string Uid);
+        Task<IEnumerable<NotificationViewModel>> GetNotifcations(string Uid);
+        Dictionary<string, string> GetUserNameByIds(List<string> userIds);
     }
 }

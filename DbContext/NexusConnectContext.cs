@@ -11,6 +11,8 @@ public class NexusConnectContext : IdentityDbContext<StoreUser>
     public DbSet<Client> Client { get; set; }
     public DbSet<UserClient> UserClient { get; set; }
     public DbSet<Ticket> Ticket { get; set; }
+    public DbSet<Team> Team { get; set; }
+    public DbSet<Notification> Notification { get; set; }
     public NexusConnectContext(DbContextOptions<NexusConnectContext> options) : base(options)
     {
 
@@ -91,13 +93,37 @@ public class NexusConnectContext : IdentityDbContext<StoreUser>
             {
                 Id = 1,
                 Uid = "53c8d500-2936-4aa6-8d38-f3b03c34c903",
+                CreatedUid = "53c8d500-2936-4aa6-8d38-f3b03c34c903",
                 Name = "Alfa Delta Team",
                 CreatedTimestamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds(),
                 Cid = 1,
                 Status = Data.StatusType.Active
             }
         );
-
+        modelBuilder.Entity<Notification>().HasData(
+             new Notification()
+             {
+                 Id = 1,
+                 Uid = "53c8d500-2936-4aa6-8d38-f3b03c34c903",
+                 CreatedUid = "53c8d500-2936-4aa6-8d38-f3b03c34c903",
+                 Title = "test Message",
+                 Message = "Alfa Delta Team, Go !",
+                 CreatedTimestamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds(),
+                 Cid = 1,
+                 ReadedTimeStamp = 0
+             },
+             new Notification()
+             {
+                 Id = 2,
+                 Uid = "53c8d500-2936-4aa6-8d38-f3b03c34c903",
+                 CreatedUid = "53c8d500-2936-4aa6-8d38-f3b03c34c903",
+                 Title = "Second test",
+                 Message = "Alfa Delta Team, Go Go Go!",
+                 CreatedTimestamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds(),
+                 Cid = 0,
+                 ReadedTimeStamp = 0
+             }
+         );
     }
 }
 

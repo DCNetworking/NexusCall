@@ -14,6 +14,7 @@ public class AccessController : Controller
     private readonly ILogger<AccessController> _logger;
     private readonly ISession _session;
     readonly IMapper _mapper;
+    readonly IHttpContextAccessor _httpContextAccessor;
     readonly SignInManager<StoreUser> _signInManager;
     readonly UserManager<StoreUser> _userManager;
     public AccessController(ILogger<AccessController> logger, SignInManager<StoreUser> signInManager, UserManager<StoreUser> userManager, IHttpContextAccessor httpContextAccessor, IMapper mapper)
@@ -23,6 +24,7 @@ public class AccessController : Controller
         _userManager = userManager;
         _signInManager = signInManager;
         _logger = logger;
+        _httpContextAccessor = httpContextAccessor;
     }
     public IActionResult Login()
     {
@@ -61,6 +63,7 @@ public class AccessController : Controller
             var result = await _signInManager.PasswordSignInAsync(model.Username, model.Password, model.RememberMe, false);
             if (result.Succeeded)
             {
+                _httpContextAccessor.HttpContext.Session.SetString("SessionExpiresAt", DateTime.UtcNow.Add(TimeSpan.FromSeconds(10)).ToString("O"));
                 if (Request.Query.Keys.Contains("ReturnUrl"))
                 {
                     return Redirect(Request.Query["ReturnUrl"].First());

@@ -7,14 +7,20 @@ using Microsoft.EntityFrameworkCore;
 using nexus_connect.Data.Entities;
 using nexus_connect.DbContext;
 using nexus_connect.ViewModels;
+using Microsoft.AspNetCore.Identity;
+using AutoMapper;
 
 namespace nexus_connect.Data
 {
     public class NexusConnectRepository : INexusConnectRepository
     {
         readonly NexusConnectContext _ctx;
-        public NexusConnectRepository(NexusConnectContext ctx)
+        readonly UserManager<StoreUser> _userManager;
+        readonly IMapper _mapper;
+        public NexusConnectRepository(NexusConnectContext ctx, UserManager<StoreUser> userManager, IMapper mapper)
         {
+            _mapper = mapper;
+            _userManager = userManager;
             _ctx = ctx;
         }
         public async Task<IEnumerable<Client>> GetAllClientsAsync()
@@ -70,6 +76,38 @@ namespace nexus_connect.Data
            })
            .ToListAsync();
             return clients;
+        }
+
+        public async Task<IEnumerable<NotificationViewModel>> GetNotifcations(string Uid)
+        {
+            List<Notification>? notifications = await _ctx.Notification.Where(p => p.Uid == Uid).ToListAsync();
+            List<string?>? createdUserIds = notifications.Select(notify => notify.CreatedUid).ToList();
+            Dictionary<string, string>? createdUserNames = GetUserNameByIds(createdUserIds);
+            IEnumerable<NotificationViewModel>? notificationViewModels = notifications.Select(notify => new NotificationViewModel()
+            {
+                Id = notify.Id,
+                Cid = notify.Cid,
+                CreatedTimestamp = notify.CreatedTimestamp,
+                CreatedUid = notify.CreatedUid,
+                CreatedUserName = createdUserNames[notify.CreatedUid],
+                Title = notify.Title,
+                Message = notify.Message,
+                ReadedTimeStamp = notify.ReadedTimeStamp
+            });
+            return notificationViewModels;
+        }
+
+        public Dictionary<string, string> GetUserNameByIds(List<string> userIds)
+        {
+            List<StoreUser>? users = _userManager.Users.Where(user => userIds.Contains(user.Id)).ToList();
+            Dictionary<string, string?>? userNames = users.ToDictionary(user => user.Id, user => user.UserName);
+
+            IEnumerable<string>? missingUserIds = userIds.Except(userNames.Keys);
+            foreach (var missingUserId in missingUserIds)
+            {
+                userNames[missingUserId] = "anonymous";
+            }
+            return userNames;
         }
     }
 }

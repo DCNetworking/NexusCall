@@ -1,0 +1,31 @@
+@model IEnumerable<NotificationViewModel>;
+@using nexus_connect.Services.TimeServices;
+@using nexus_connect.Data;
+<div>
+    @foreach (var notification in Model)
+    { 
+        string createdDate = TimeConverter.TimeStampToDateWithTimeZone(notification.CreatedTimestamp);
+        @if (@notification.ReadedTimeStamp == 0)  
+        {
+          <div class="notification notification--new">
+              <div class="notification_head">
+                 <div class="notifiaction_head---title">@notification.Title</div>
+                 <div class="notifiaction_head--user_created mr-5">@notification.CreatedUserName</div>
+                 <div class="notifiaction_head--created mr-5">@createdDate</div>
+              </div>
+              <div class="notifiaction--message">@notification.Message</div>
+          </div>
+        }
+        else
+        {
+          <div class="notification notification--readed">
+              <div class="notification_head">
+                <div class="notifiaction_head---title">@notification.Title</div>
+                <div class="notifiaction_head--user_created mr-5">@notification.CreatedUserName</div>
+                <div class="notifiaction_head--created mr-5">@createdDate</div>
+              </div>
+              <div class="notifiaction--message">@notification.Message</div>
+          </div>
+        }         }
+</div>
+

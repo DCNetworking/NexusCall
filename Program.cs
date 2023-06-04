@@ -14,13 +14,15 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<NexusConnectContext>(cfg => cfg.UseSqlite("Data Source=NexusConnect.sqlite"));
 builder.Services.AddScoped<INexusConnectRepository, NexusConnectRepository>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-builder.Services.AddSession();
+
+builder.Services.AddSession((options) => { options.IdleTimeout = TimeSpan.FromMinutes(1); });
 builder.Services.AddIdentity<StoreUser, IdentityRole>(cfg =>
     {
         cfg.User.RequireUniqueEmail = true;
     }
 
 ).AddEntityFrameworkStores<NexusConnectContext>();
+
 var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -34,6 +36,31 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseAuthentication();
 app.UseRouting();
+
+var webSocketOptions = new WebSocketOptions
+{
+    KeepAliveInterval = TimeSpan.FromSeconds(10)
+};
+app.UseWebSockets(webSocketOptions);
+app.Use(async (context, next) =>
+{
+    if (context.Request.Path == "/ws")
+    {
+        if (context.WebSockets.IsWebSocketRequest)
+        {
+            using var webSocket = await context.WebSockets.AcceptWebSocketAsync();
+        }
+        else
+        {
+            context.Response.StatusCode = StatusCodes.Status400BadRequest;
+        }
+    }
+    else
+    {
+        await next(context);
+    }
+
+});
 app.UseMiddleware<RedirectMiddleware>();
 app.MapControllerRoute(
     name: "default",

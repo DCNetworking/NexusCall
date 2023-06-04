@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using nexus_connect.DbContext;
 
@@ -10,9 +11,11 @@ using nexus_connect.DbContext;
 namespace nexus_connect.Migrations
 {
     [DbContext(typeof(NexusConnectContext))]
-    partial class NexusConnectContextModelSnapshot : ModelSnapshot
+    [Migration("20230603080335_CreadTeamTabl")]
+    partial class CreadTeamTabl
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.5");
@@ -181,7 +184,7 @@ namespace nexus_connect.Migrations
                         {
                             Id = 1,
                             ColorAccent = "rgb(50, 17, 69)",
-                            CreatedTime = 1685817129L,
+                            CreatedTime = 1685779415L,
                             LastChangeTime = 0L,
                             LocalUrl = "ebay",
                             Name = "E-Bay",
@@ -191,71 +194,11 @@ namespace nexus_connect.Migrations
                         {
                             Id = 2,
                             ColorAccent = "rgb(146,201,3)",
-                            CreatedTime = 1685816129L,
+                            CreatedTime = 1685778415L,
                             LastChangeTime = 0L,
                             LocalUrl = "tdj",
                             Name = "TDJ Developer",
                             Status = 1
-                        });
-                });
-
-            modelBuilder.Entity("nexus_connect.Data.Entities.Notification", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("Cid")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<long>("CreatedTimestamp")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("CreatedUid")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Message")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("TEXT");
-
-                    b.Property<long>("ReadedTimeStamp")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Uid")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Notification");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Cid = 1,
-                            CreatedTimestamp = 1685817129L,
-                            CreatedUid = "53c8d500-2936-4aa6-8d38-f3b03c34c903",
-                            Message = "Alfa Delta Team, Go !",
-                            ReadedTimeStamp = 0L,
-                            Title = "test Message",
-                            Uid = "53c8d500-2936-4aa6-8d38-f3b03c34c903"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Cid = 0,
-                            CreatedTimestamp = 1685817129L,
-                            CreatedUid = "53c8d500-2936-4aa6-8d38-f3b03c34c903",
-                            Message = "Alfa Delta Team, Go Go Go!",
-                            ReadedTimeStamp = 0L,
-                            Title = "Second test",
-                            Uid = "53c8d500-2936-4aa6-8d38-f3b03c34c903"
                         });
                 });
 
@@ -381,7 +324,7 @@ namespace nexus_connect.Migrations
                         {
                             Id = 1,
                             Cid = 1,
-                            CreatedTimestamp = 1685817129L,
+                            CreatedTimestamp = 1685779415L,
                             CreatedUid = "53c8d500-2936-4aa6-8d38-f3b03c34c903",
                             LastChangeTimestamp = 0L,
                             Name = "Alfa Delta Team",
@@ -433,9 +376,9 @@ namespace nexus_connect.Migrations
                             LogHistory = "",
                             RelId = 0,
                             TicketCaseType = 3,
-                            TicketCreatedTime = 1685817129L,
+                            TicketCreatedTime = 1685779415L,
                             TicketEndTime = 0L,
-                            TicketLastChangeTime = 1685817129L
+                            TicketLastChangeTime = 1685779415L
                         },
                         new
                         {
@@ -444,9 +387,9 @@ namespace nexus_connect.Migrations
                             LogHistory = "",
                             RelId = 0,
                             TicketCaseType = 2,
-                            TicketCreatedTime = 1685815329L,
+                            TicketCreatedTime = 1685777615L,
                             TicketEndTime = 0L,
-                            TicketLastChangeTime = 1685815329L
+                            TicketLastChangeTime = 1685777615L
                         });
                 });
 
@@ -492,7 +435,7 @@ namespace nexus_connect.Migrations
                             AccessPermission = 10,
                             BannedTimestamp = 0L,
                             ClientId = 1,
-                            CreatedTimestamp = 1685817129L,
+                            CreatedTimestamp = 1685779415L,
                             LastChangeTimestamp = 0L,
                             Status = 1,
                             Uid = "53c8d500-2936-4aa6-8d38-f3b03c34c903"
@@ -504,7 +447,7 @@ namespace nexus_connect.Migrations
                             AccessPermission = 100,
                             BannedTimestamp = 0L,
                             ClientId = 2,
-                            CreatedTimestamp = 1685817129L,
+                            CreatedTimestamp = 1685779415L,
                             LastChangeTimestamp = 0L,
                             Status = 1,
                             Uid = "53c8d500-2936-4aa6-8d38-f3b03c34c903"

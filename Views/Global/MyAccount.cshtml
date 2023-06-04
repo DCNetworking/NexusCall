@@ -4,7 +4,6 @@
     var properties = typeof(MyAccountViewModel).GetProperties();
 }
 
-@section MainContainer {
 <form>
     <div class="form-group row align-self-center" style="width:40%;">
  @foreach (var property in properties)
@@ -18,5 +17,3 @@
 }
     </div>
 </form>
-
-}

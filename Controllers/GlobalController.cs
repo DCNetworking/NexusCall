@@ -7,6 +7,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using nexus_connect.Data;
 using nexus_connect.Data.Entities;
 using nexus_connect.ViewModels;
 
@@ -18,8 +19,10 @@ namespace nexus_connect.Controllers
         private readonly ILogger<GlobalController> _logger;
         readonly UserManager<StoreUser> _userManager;
         readonly IMapper _mapper;
-        public GlobalController(ILogger<GlobalController> logger, UserManager<StoreUser> userManager, IMapper mapper)
+        readonly INexusConnectRepository _repository;
+        public GlobalController(ILogger<GlobalController> logger, UserManager<StoreUser> userManager, IMapper mapper, INexusConnectRepository repository)
         {
+            _repository = repository;
             _userManager = userManager;
             _logger = logger;
             _mapper = mapper;
@@ -28,11 +31,13 @@ namespace nexus_connect.Controllers
         public async Task<IActionResult> MyAccount(MyAccountViewModel model)
         {
             var user = await _userManager.GetUserAsync(User);
-            return View(_mapper.Map<MyAccountViewModel>(user));
+            return PartialView("MyAccount", _mapper.Map<MyAccountViewModel>(user));
         }
-        public IActionResult Notifications()
+        public async Task<IActionResult> Notifications(NotificationViewModel model)
         {
-            return View();
+            var user = await _userManager.GetUserAsync(User);
+            var notifiactions = await _repository.GetNotifcations(user.Id);
+            return PartialView("Notifications", notifiactions);
         }
         public IActionResult Dashboard()
         {

@@ -1,8 +1,4 @@
 using System.ComponentModel.DataAnnotations.Schema;
-
-
-
-
 using System.ComponentModel.DataAnnotations;
 namespace nexus_connect.Data.Entities;
 public class Client

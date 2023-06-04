@@ -48,8 +48,8 @@
                             Context Menu
                         </div>
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item"><a asp-controller="Global" asp-action="Myaccount" class="">My Account</a></li>
-                            <li class="list-group-item"><a asp-controller="Global" asp-action="Notifications">Notifications</a><span class="badge badge-danger" style="background-color: red;">4</span></li>
+                            <li class="list-group-item"><a  id="openModalLink-MyAccount" asp-controller="Global" asp-action="Myaccount" class="">My Account</a></li>
+                            <li class="list-group-item"><a  id="openModalLink-Notifications" asp-controller="Global" asp-action="Notifications">Notifications</a><span class="badge badge-danger" style="background-color: red;">4</span></li>
                             <li class="list-group-item"><a href="#" class="">Dashboard</a></li>
                         </ul>
                     </div>
@@ -61,7 +61,13 @@
             </div>
         </main>
     </div>
-
+     <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>Modal Content</h3>
+            <div id="modalContentPlaceholder"></div>
+        </div>
+    </div>
     <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2023 - nexus_connect - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
